@@ -46,8 +46,10 @@ def clear_scene(bg_colour = (1,1,1,1), clipping = 1e6, raw_colours = True):
     
     if bpy.context.mode != 'OBJECT':
         bpy.ops.object.mode_set(mode = 'OBJECT')
+        
     bpy.ops.object.select_all(action='SELECT')
     bpy.ops.object.delete(use_global=False)
+    
     if bg_colour:
         assert len(bg_colour) == 4, "colour must RGBA"
         bpy.data.worlds['World'].node_tree.nodes["Background"].inputs[0].default_value = bg_colour
@@ -69,6 +71,7 @@ def frame_selected():
     frames selected objects in blender viewer. 
     
     """
+    
     for area in bpy.context.screen.areas:
         if area.type == 'VIEW_3D':
             for region in area.regions:
@@ -85,6 +88,70 @@ def frame_selected():
 
     return
 
+
+def frame_all():
+    
+    """
+    frames all objects in blender viewer. 
+    
+    """
+    
+    for area in bpy.context.screen.areas:
+        if area.type == 'VIEW_3D':
+            for region in area.regions:
+                if region.type == 'WINDOW':
+                    override = {
+                        'area': area,
+                        'region': region,
+                        'edit_object': bpy.context.edit_object
+                    }
+                    with bpy.context.temp_override(**override):
+                        bpy.ops.view3d.view_axis(type='TOP')
+                        bpy.ops.view3d.view_all()
+                    break
+            break
+
+    return
+
+
+def bulletproof_name(name):
+    
+    """
+    
+    returns a new name if the name is already in use. This avoids conflicts with blender object operations.
+    
+    name (str): desired name.
+    
+    returns:
+        name (str): desired name with a numeric suffix. 
+    
+    """
+    
+    base = name
+    i = 1
+    
+    while name in bpy.data.objects:
+        name = f"{base}.{i:03d}"
+        i += 1
+    return name
+
+
+def collect_meshes(name):
+    
+    """
+    
+    returns a Blender collection by name, or creates a new one if necessary. 
+    name (str): name of collection.
+    
+    returns:
+        col (bpy.types.Collection)
+    
+    """
+    if name in bpy.data.collections:
+        return bpy.data.collections[name]
+    col = bpy.data.collections.new(name)
+    bpy.context.scene.collection.children.link(col)
+    return col
 
 def is_inside(p, obj):
 
@@ -275,21 +342,22 @@ def build_from_swc(filepath, name = None,
     if not name:
         name = 'neuron'
     
-    base = name
-    i = 1
-    
-    while name in bpy.data.objects:
-        name = f"{base}.{i:03d}"
-        i += 1
-        
-    em.name = name
+    em.name = bulletproof_name(name)
 
     if rotating: 
         em.rotation_euler = [0, 0, 0]
         em.keyframe_insert(data_path='rotation_euler', frame = 1)
         em.rotation_euler = [0, 0, math.radians(360)]
         em.keyframe_insert(data_path='rotation_euler', frame = 360)
+        
+        bpy.data.scenes['Scene'].frame_end = 360
+        
+        for fcurve in em.animation_data.action.fcurves:
+            for keyframe in fcurve.keyframe_points:
+                keyframe.interpolation = 'LINEAR'
+        
     elif rotate:
+        
         em.rotation_euler = [0, random.randrange(0,30), random.randrange(0,360)]
         
         
@@ -308,7 +376,6 @@ def build_from_swc(filepath, name = None,
     pbsdf_node.inputs['Sheen Weight'].default_value = 0
     pbsdf_node.inputs['Alpha'].default_value = alpha
     material.blend_method = 'BLEND'
-    
     
     last = 0
     
@@ -419,7 +486,6 @@ def build_from_swc(filepath, name = None,
             obj.select_set(True)
             bpy.context.view_layer.objects.active = obj
             
-            
     soma = next((obj for obj in bpy.data.objects[name].children if 'Soma' in obj.name), None)
 
     bpy.ops.object.select_all(action='DESELECT')
@@ -520,7 +586,7 @@ def mesh_from_coordinates(coordinates, name = None, reference_object = None, sca
     
     mesh = bpy.data.meshes.new("coordinates")
     mesh_object = bpy.data.objects.new("coordinates",mesh)
-    mesh_object.name = name
+    mesh_object.name = f'{name}_temp'
     
     #create mesh from coords
     mesh.from_pydata(coordinates*scale_f,[],[])
@@ -542,8 +608,28 @@ def mesh_from_coordinates(coordinates, name = None, reference_object = None, sca
         
     reference_object.parent = mesh_object
     mesh_object.instance_type = "VERTS"
+    bpy.ops.object.select_all(action='DESELECT')
     
-    return mesh_object
+    mesh_object.select_set(True)
+    before = set(bpy.data.objects)
+    bpy.ops.object.duplicates_make_real()
+    after = set(bpy.data.objects)
+    realised = list(after - before)
+    
+    for r in realised:
+        r.select_set(True)
+    bpy.context.view_layer.objects.active = realised[0]
+    bpy.ops.object.join()
+    joined_obj = bpy.context.selected_objects[0]
+    joined_obj.name = bulletproof_name(name)
+    
+    bpy.data.objects.remove(mesh_object, do_unlink=True)
+    bpy.data.objects.remove(reference_object, do_unlink=True)
+
+    frame_selected()
+    
+    return joined_obj
+
 
 def draw_somas(soma_coordinates, name = None, colour = None, radius = 7, res = 1, alpha = 1, scale_f = 1e6):
     
@@ -581,8 +667,7 @@ def draw_somas(soma_coordinates, name = None, colour = None, radius = 7, res = 1
     return mesh_object
 
 
-
-def draw_hypervoxels(hypervoxel_coords, hypervoxel_side_length = 300.0, colour = (0,0,0,1), alpha = 1, thickness = 30):
+def draw_hypervoxels(hypervoxel_coords, hypervoxel_side_length = 300.0, colour = (0,0,0,1), alpha = 1, thickness = 30, scale_f = 1e6):
     
     """
     draw hypervoxels as skeleton cubes.
@@ -593,7 +678,8 @@ def draw_hypervoxels(hypervoxel_coords, hypervoxel_side_length = 300.0, colour =
     colour (RGBA, optional): Colour to render hypervoxels in. If not specfied a random colour will be generated.
     alpha (float, optional): alpha value (transparency) for material. Must be in the interval [0,1]. Default: 1. 
     thickness (float, optional): Thickness of wireframe. 
-    
+    scale_f (float, optional): scaling factor for coordinates to blender space. Default: 1e6.
+
     returns:
         obj (bpy.types.Object): blender mesh object of hypervoxels. 
     """
@@ -613,12 +699,15 @@ def draw_hypervoxels(hypervoxel_coords, hypervoxel_side_length = 300.0, colour =
     
     reference_cube = bpy.context.selected_objects[0]
     reference_cube.data.materials.append(material)
+    reference_cube.name = 'hypervoxel'
     
     mod = reference_cube.modifiers.new(name="wf", type='WIREFRAME')
     mod.thickness = thickness
     mod.use_replace = True
+    bpy.ops.object.modifier_apply(modifier='wf')
     
-    mesh = mesh_from_coordinates(coordinates = hypervoxel_coords, reference_object= reference_cube)
+    hypervoxel_coords = np.array(hypervoxel_coords)*scale_f
+    mesh = mesh_from_coordinates(coordinates = hypervoxel_coords, name = 'hypervoxels',reference_object= reference_cube)
     
     return mesh
 
@@ -627,7 +716,8 @@ def draw_hypervoxels(hypervoxel_coords, hypervoxel_side_length = 300.0, colour =
 #### Snudda specfic functions ####
 ##################################
 
-### Note: tested with Snudda SNr branch only. For virtual synapses: synapse location must be saved in input hdf5 file. OBS: this is not default snudda behaviour.
+### Note: tested with Snudda SNr branch only. For virtual synapses: synapse location must be saved in input hdf5 file.
+### OBS: this is not default snudda behaviour.
 ### Snudda uses microns at some points, and meters at others. Adjust scale_f depending on use case. 
 
 
