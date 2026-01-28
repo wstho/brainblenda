@@ -113,23 +113,24 @@ def frame_all():
 
     return
 
+
 def set_coronal_view():
-    
     """
     sets 3D view to coronal (following Allen mesh conventions)
-    
+
     """
     for area in bpy.context.screen.areas:
-        if area.type == 'VIEW_3D':
+        if area.type == "VIEW_3D":
             space = area.spaces.active
             region_3d = space.region_3d
-            
+
             base_quat = mathutils.Quaternion((0.5, 0.5, 0.5, 0.5))
             roll_quat = mathutils.Quaternion((1.0, 0.0, 0.0), math.radians(90))
             region_3d.view_rotation = roll_quat @ base_quat
-            region_3d.view_perspective = 'ORTHO'
+            region_3d.view_perspective = "ORTHO"
             break
     return
+
 
 def bulletproof_name(name):
     """
@@ -284,7 +285,7 @@ def flip_mesh_across_midline(obj, midline=5691.66):
     return
 
 
-def bisect_object(obj, plane = 'sagittal', location = 5691.66):
+def bisect_object(obj, plane="sagittal", location=5691.66):
     """
     splits mesh objects at specified plane
     obj (bpy.types.Object): blender mesh object.
@@ -292,86 +293,99 @@ def bisect_object(obj, plane = 'sagittal', location = 5691.66):
     location (float): location along axis to bisect.
 
     """
-    
-    assert plane.lower() in ['sagittal', 'coronal', 'horizontal'], f'Ensure plane is one of sagittal, coronal, or horizontal. Received: {plane}.'
-    
-    bpy.ops.object.mode_set(mode='OBJECT')
-    bpy.ops.object.mode_set(mode='EDIT')
-    bpy.ops.mesh.select_all(action='SELECT')
-    
-    plane_key = {'sagittal': 2, 'coronal': 0, 'horizontal':1}
-    
+
+    assert plane.lower() in [
+        "sagittal",
+        "coronal",
+        "horizontal",
+    ], f"Ensure plane is one of sagittal, coronal, or horizontal. Received: {plane}."
+
+    bpy.ops.object.mode_set(mode="OBJECT")
+    bpy.ops.object.mode_set(mode="EDIT")
+    bpy.ops.mesh.select_all(action="SELECT")
+
+    plane_key = {"sagittal": 2, "coronal": 0, "horizontal": 1}
+
     plane_co = [0, 0, 0]
-    plane_no = [0, 0, 0] 
-    
+    plane_no = [0, 0, 0]
+
     plane_co[plane_key[plane.lower()]] = location
     plane_no[plane_key[plane.lower()]] = 1
-    
+
     bpy.ops.mesh.bisect(
         plane_co=plane_co,
         plane_no=plane_no,
-        use_fill=True,        
-        clear_inner=False,    
-        clear_outer=True,    
-        threshold=0.0001
+        use_fill=True,
+        clear_inner=False,
+        clear_outer=True,
+        threshold=0.0001,
     )
-    
-    bpy.ops.object.mode_set(mode='OBJECT')
+
+    bpy.ops.object.mode_set(mode="OBJECT")
 
     return
 
-def set_origin_to_center(obj):
 
+def set_origin_to_center(obj):
     """
-    sets origin to center of volume of object 
+    sets origin to center of volume of object
     obj (bpy.types.Object): blender mesh object.
 
     returns:
         obj.location: (XYZ)
     """
-    
-    if bpy.context.active_object and bpy.context.active_object.mode != 'OBJECT':
-        bpy.ops.object.mode_set(mode = 'OBJECT')
-    bpy.ops.object.select_all(action = 'DESELECT')
+
+    if bpy.context.active_object and bpy.context.active_object.mode != "OBJECT":
+        bpy.ops.object.mode_set(mode="OBJECT")
+    bpy.ops.object.select_all(action="DESELECT")
     obj.select_set(True)
     bpy.context.view_layer.objects.active = obj
-    bpy.ops.object.origin_set(type = 'ORIGIN_CENTER_OF_VOLUME')
-    
+    bpy.ops.object.origin_set(type="ORIGIN_CENTER_OF_VOLUME")
+
     return obj.location
 
-def add_tracked_camera(target_name, rotate = True, coronal = True, x_res = 2160, y_res = 2160, altitude = 30, cam_clip_end = 1e6, cam_type = 'ORTHO', cam_scale = 2e4):
-    
+
+def add_tracked_camera(
+    target_name,
+    rotate=True,
+    coronal=True,
+    x_res=2160,
+    y_res=2160,
+    altitude=30,
+    cam_clip_end=1e6,
+    cam_type="ORTHO",
+    cam_scale=2e4,
+):
     """
     adds a camera to the scene, tracked to the center of a specified object.
-    
+
     target_name (str): name of object to track to.
     rotate (bool): whether the camera should rotate about the object.
-    coronal (bool): if True, will set a coronal view (Allen convention). 
+    coronal (bool): if True, will set a coronal view (Allen convention).
     x_res, y_res (int): resolution of x and y axes of camera (px).
-    
+
     """
-    
+
     x_res = round(x_res)
     y_res = round(y_res)
-    
+
     target = bpy.data.objects[target_name]
     set_origin_to_center(target)
     frame_selected()
-    
+
     if coronal:
         set_coronal_view()
-        
-    bpy.ops.object.empty_add(type = 'PLAIN_AXES', location = target.location)
-    bpy.ops.object.camera_add()
-    
 
-    cam = bpy.data.objects['Camera']
+    bpy.ops.object.empty_add(type="PLAIN_AXES", location=target.location)
+    bpy.ops.object.camera_add()
+
+    cam = bpy.data.objects["Camera"]
     bpy.context.scene.camera = cam
-    
+
     for area in bpy.context.window.screen.areas:
-        if area.type == 'VIEW_3D':
+        if area.type == "VIEW_3D":
             for region in area.regions:
-                if region.type == 'WINDOW':
+                if region.type == "WINDOW":
                     with bpy.context.temp_override(
                         window=bpy.context.window,
                         screen=bpy.context.window.screen,
@@ -383,53 +397,53 @@ def add_tracked_camera(target_name, rotate = True, coronal = True, x_res = 2160,
                         bpy.ops.view3d.camera_to_view()
                     break
             break
-        
+
     cam.data.clip_end = cam_clip_end
     cam.data.type = cam_type
-    if cam_type == 'ORTHO':
+    if cam_type == "ORTHO":
         cam.data.ortho_scale = cam_scale
-    
-    em = bpy.data.objects['Empty']
-    
-    bpy.ops.object.mode_set(mode = 'OBJECT')
-    bpy.ops.object.select_all(action = 'DESELECT')
+
+    em = bpy.data.objects["Empty"]
+
+    bpy.ops.object.mode_set(mode="OBJECT")
+    bpy.ops.object.select_all(action="DESELECT")
     cam.select_set(True)
     em.select_set(True)
     bpy.context.view_layer.objects.active = em
-    bpy.ops.object.parent_set(type = 'OBJECT', keep_transform=True)
-        
+    bpy.ops.object.parent_set(type="OBJECT", keep_transform=True)
+
     if rotate:
         em.rotation_euler = [0, 0, math.radians(altitude)]
         em.keyframe_insert(data_path="rotation_euler", frame=1)
         em.rotation_euler = [0, math.radians(360), math.radians(altitude)]
         em.keyframe_insert(data_path="rotation_euler", frame=360)
-        
+
         bpy.data.scenes["Scene"].frame_end = 360
-        
+
         for fcurve in em.animation_data.action.fcurves:
             for keyframe in fcurve.keyframe_points:
                 keyframe.interpolation = "LINEAR"
-    bpy.data.scenes['Scene'].render.resolution_x = x_res
-    bpy.data.scenes['Scene'].render.resolution_y = y_res
+    bpy.data.scenes["Scene"].render.resolution_x = x_res
+    bpy.data.scenes["Scene"].render.resolution_y = y_res
     return
 
 
-def animate_visibility(obj, frame, on = True):
+def animate_visibility(obj, frame, on=True):
     """
     animates the visibility of an object in both render and viewport.
-    
+
     obj (bpy.types.Object): blender mesh object.
     frame (int): keyframe at which the object should change visibility
-    on (bool): if True, the object will start invisibile and become visibile at frame. If False, the inverse will occur. Default: True. 
-    
+    on (bool): if True, the object will start invisibile and become visibile at frame. If False, the inverse will occur. Default: True.
+
     """
-    
+
     bpy.context.scene.frame_set(1)
-    obj.hide_render = on  
+    obj.hide_render = on
     obj.keyframe_insert(data_path="hide_render", frame=1)
     obj.hide_viewport = on
     obj.keyframe_insert(data_path="hide_viewport", frame=1)
-    
+
     bpy.context.scene.frame_set(frame)
     obj.hide_render = ~on
     obj.keyframe_insert(data_path="hide_render", frame=frame)
@@ -440,6 +454,7 @@ def animate_visibility(obj, frame, on = True):
         for keyframe in fcurve.keyframe_points:
             keyframe.interpolation = "LINEAR"
     return
+
 
 def build_from_swc(
     filepath,
@@ -733,7 +748,9 @@ def build_from_swc(
     return joined_obj
 
 
-def import_allen_mesh(filepath, forward_axis="Y", up_axis="Z", colour=None, alpha=1, bf_cull = False):
+def import_allen_mesh(
+    filepath, forward_axis="Y", up_axis="Z", colour=None, alpha=1, bf_cull=False
+):
     """
     imports .obj files from Allen SDK to blender.
 
