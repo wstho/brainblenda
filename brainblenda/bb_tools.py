@@ -351,7 +351,7 @@ def add_tracked_camera(
     coronal=True,
     x_res=2160,
     y_res=2160,
-    altitude=30,
+    altitude=0,
     cam_clip_end=1e6,
     cam_type="ORTHO",
     cam_scale=2e4,
@@ -363,9 +363,14 @@ def add_tracked_camera(
     rotate (bool): whether the camera should rotate about the object.
     coronal (bool): if True, will set a coronal view (Allen convention).
     x_res, y_res (int): resolution of x and y axes of camera (px).
-
+    altitude (float): altitude of camera angle w.r.t. horizontal plane, in degrees. Default: 0.
+    cam_clip_end (float): clipping threshold of camera. Default: 1e6. 
+    cam_type (str): camera type. Default: 'ORTHO'. 
+    cam_scale (float): camera scaling (i.e., zoom) for orthogonal cameras. Default: 2e4. 
     """
 
+    assert cam_type in ['PERSP', 'ORTHO', 'PANO', 'CUSTOM'], 'Check camera type!'
+    
     x_res = round(x_res)
     y_res = round(y_res)
 
