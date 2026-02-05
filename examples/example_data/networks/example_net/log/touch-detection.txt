@@ -1,0 +1,172 @@
+Using hdf5 driver version: latest
+Memory: 1234141184 free, 8589934592 total
+Each hyper voxel has 100 x 100 x 100 voxels
+Touch detecting all volumes
+Loading from /Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net/network-config.json
+Reading random seed from config file: 681542567
+Reading prototype for: mSNrn_0
+Setting axon density for neuron without axon
+Reading prototype for: mSNrn_1
+Setting axon density for neuron without axon
+Reading prototype for: mSNrn_2
+Setting axon density for neuron without axon
+Reading prototype for: mSNrn_3
+Setting axon density for neuron without axon
+Reading prototype for: mSNrn_4
+Setting axon density for neuron without axon
+Reading prototype for: mSNrn_5
+Setting axon density for neuron without axon
+Reading prototype for: mSNrn_6
+Setting axon density for neuron without axon
+Reading prototype for: lSNrn_0
+Setting axon density for neuron without axon
+Reading prototype for: lSNrn_1
+Setting axon density for neuron without axon
+Reading prototype for: lSNrn_2
+Setting axon density for neuron without axon
+Reading prototype for: lSNrn_3
+Setting axon density for neuron without axon
+Reading prototype for: lSNrn_4
+Setting axon density for neuron without axon
+Reading prototype for: lSNrn_5
+Setting axon density for neuron without axon
+Reading prototype for: lSNrn_6
+Setting axon density for neuron without axon
+Loading connectivity information
+Memory: 1229160448 free, 8589934592 total
+Reading positions from file: /Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net/network-neuron-positions.hdf5
+Memory: 1229160448 free, 8589934592 total
+Position file read.
+Creating directory /Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net/voxels
+Setting up workers: 2026-01-28 17:18:54
+Scattering engine_logfile = ['/Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net/log/touch-detection.txt-0', '/Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net/log/touch-detection.txt-1', '/Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net/log/touch-detection.txt-2', '/Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net/log/touch-detection.txt-3', '/Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net/log/touch-detection.txt-4']
+Scatter done.
+Init values pushed to workers
+Workers setup: 2026-01-28 17:18:55
+Work history file: /Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net/log/network-detect-worklog.hdf5
+Writing metadata to work history file
+Write neuron data to file
+Finding min/max coords parallel
+Execution of min/max complete
+Gathered min/max - complete.
+Distributing neurons, parallel.
+distribute_neurons: neuron_idx = [] (n=0)
+210 hyper voxels in total
+Pre allocation done.
+Gathering neuron distribution from workers
+Distributions received.
+Setting up distance dependent targets
+underrepresented presyn: []
+Pushing hypervoxels.
+Writing neuron distribution history to file
+Generating JSON hyper voxel data
+Memory: 1223393280 free, 8589934592 total
+Writing JSON hyper voxel data to file
+Save neuron distribution history done.
+Starting parallel_process_hyper_voxels
+setup_process_hyper_voxel_state_history: Creating new work history.
+Skipping 160 empty hyper voxels
+parallel_process_hyper_voxels: Using 5 worker
+2026-01-28 17:18:55 Starting hyper voxel 95 on worker 0
+2026-01-28 17:18:55 Starting hyper voxel 94 on worker 1
+2026-01-28 17:18:55 Starting hyper voxel 59 on worker 2
+2026-01-28 17:18:55 Starting hyper voxel 53 on worker 3
+2026-01-28 17:18:55 Starting hyper voxel 58 on worker 4
+HyperID 58 completed - 108 synapses found (1.0 s)
+2026-01-28 17:18:56 Starting hyper voxel 24 on worker 4
+HyperID 94 completed - 110 synapses found (1.2 s)
+2026-01-28 17:18:56 Starting hyper voxel 64 on worker 1
+HyperID 59 completed - 212 synapses found (1.3 s)
+2026-01-28 17:18:57 Starting hyper voxel 101 on worker 2
+HyperID 53 completed - 288 synapses found (1.7 s)
+2026-01-28 17:18:57 Starting hyper voxel 66 on worker 3
+HyperID 95 completed - 536 synapses found (1.7 s)
+2026-01-28 17:18:57 Starting hyper voxel 65 on worker 0
+HyperID 64 completed - 162 synapses found (1.4 s)
+2026-01-28 17:18:58 Starting hyper voxel 129 on worker 1
+HyperID 101 completed - 219 synapses found (1.2 s)
+2026-01-28 17:18:58 Starting hyper voxel 52 on worker 2
+HyperID 24 completed - 102 synapses found (1.3 s)
+2026-01-28 17:18:58 Starting hyper voxel 60 on worker 4
+HyperID 65 completed - 173 synapses found (1.7 s)
+2026-01-28 17:18:58 Starting hyper voxel 30 on worker 0
+HyperID 66 completed - 0 synapses found (1.7 s)
+2026-01-28 17:18:59 Starting hyper voxel 130 on worker 3
+HyperID 129 completed - 190 synapses found (1.9 s)
+2026-01-28 17:19:01 Starting hyper voxel 106 on worker 1
+HyperID 52 completed - 0 synapses found (2.0 s)
+2026-01-28 17:19:01 Starting hyper voxel 57 on worker 2
+HyperID 130 completed - 213 synapses found (2.1 s)
+2026-01-28 17:19:01 Starting hyper voxel 63 on worker 3
+HyperID 60 completed - 68 synapses found (2.1 s)
+2026-01-28 17:19:01 Starting hyper voxel 136 on worker 4
+HyperID 30 completed - 226 synapses found (2.1 s)
+2026-01-28 17:19:01 Starting hyper voxel 100 on worker 0
+HyperID 106 completed - 0 synapses found (1.8 s)
+2026-01-28 17:19:03 Starting hyper voxel 105 on worker 1
+HyperID 57 completed - 93 synapses found (1.7 s)
+2026-01-28 17:19:03 Starting hyper voxel 88 on worker 2
+HyperID 63 completed - 210 synapses found (1.8 s)
+2026-01-28 17:19:03 Starting hyper voxel 96 on worker 3
+HyperID 136 completed - 0 synapses found (1.7 s)
+2026-01-28 17:19:03 Starting hyper voxel 31 on worker 4
+HyperID 100 completed - 0 synapses found (1.6 s)
+2026-01-28 17:19:03 Starting hyper voxel 29 on worker 0
+HyperID 96 completed - 0 synapses found (1.6 s)
+2026-01-28 17:19:04 Starting hyper voxel 99 on worker 3
+HyperID 31 completed - 241 synapses found (1.6 s)
+2026-01-28 17:19:04 Starting hyper voxel 137 on worker 4
+HyperID 29 completed - 171 synapses found (1.6 s)
+2026-01-28 17:19:04 Starting hyper voxel 17 on worker 0
+HyperID 105 completed - 93 synapses found (1.6 s)
+2026-01-28 17:19:04 Starting hyper voxel 70 on worker 1
+HyperID 88 completed - 313 synapses found (1.7 s)
+2026-01-28 17:19:04 Starting hyper voxel 107 on worker 2
+HyperID 137 completed - 0 synapses found (1.6 s)
+2026-01-28 17:19:06 Starting hyper voxel 71 on worker 4
+HyperID 17 completed - 201 synapses found (1.6 s)
+2026-01-28 17:19:06 Starting hyper voxel 108 on worker 0
+HyperID 70 completed - 0 synapses found (1.6 s)
+2026-01-28 17:19:06 Starting hyper voxel 112 on worker 1
+HyperID 107 completed - 120 synapses found (1.6 s)
+2026-01-28 17:19:06 Starting hyper voxel 135 on worker 2
+HyperID 99 completed - 151 synapses found (1.7 s)
+2026-01-28 17:19:06 Starting hyper voxel 25 on worker 3
+HyperID 71 completed - 74 synapses found (1.6 s)
+2026-01-28 17:19:08 Starting hyper voxel 18 on worker 4
+HyperID 108 completed - 0 synapses found (1.6 s)
+2026-01-28 17:19:08 Starting hyper voxel 87 on worker 0
+HyperID 112 completed - 0 synapses found (1.5 s)
+2026-01-28 17:19:08 Starting hyper voxel 102 on worker 1
+HyperID 135 completed - 0 synapses found (1.5 s)
+2026-01-28 17:19:08 Starting hyper voxel 16 on worker 2
+HyperID 25 completed - 0 synapses found (1.5 s)
+2026-01-28 17:19:08 Starting hyper voxel 89 on worker 3
+HyperID 87 completed - 0 synapses found (1.5 s)
+2026-01-28 17:19:10 Starting hyper voxel 72 on worker 0
+HyperID 102 completed - 0 synapses found (1.5 s)
+2026-01-28 17:19:10 Starting hyper voxel 147 on worker 1
+HyperID 16 completed - 0 synapses found (1.7 s)
+2026-01-28 17:19:10 Starting hyper voxel 67 on worker 2
+HyperID 18 completed - 242 synapses found (1.6 s)
+2026-01-28 17:19:10 Starting hyper voxel 54 on worker 4
+HyperID 89 completed - 0 synapses found (2.0 s)
+2026-01-28 17:19:10 Starting hyper voxel 51 on worker 3
+HyperID 147 completed - 0 synapses found (1.6 s)
+2026-01-28 17:19:11 Starting hyper voxel 46 on worker 1
+HyperID 67 completed - 0 synapses found (1.6 s)
+2026-01-28 17:19:12 Starting hyper voxel 23 on worker 2
+HyperID 54 completed - 0 synapses found (1.5 s)
+2026-01-28 17:19:12 Starting hyper voxel 22 on worker 4
+HyperID 72 completed - 104 synapses found (1.7 s)
+2026-01-28 17:19:12 Starting hyper voxel 93 on worker 0
+HyperID 51 completed - 0 synapses found (1.7 s)
+2026-01-28 17:19:12 Starting hyper voxel 148 on worker 3
+HyperID 22 completed - 0 synapses found (1.6 s)
+HyperID 46 completed - 0 synapses found (1.7 s)
+HyperID 23 completed - 126 synapses found (1.7 s)
+HyperID 148 completed - 0 synapses found (1.5 s)
+HyperID 93 completed - 81 synapses found (1.6 s)
+Voxel overflows: 0
+Total number of synapses: 4827
+parallel_process_hyper_voxels: 18.4 s

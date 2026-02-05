@@ -1,0 +1,16 @@
+Log file /Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net/log/synapse-pruning.txt created.
+Using hdf5 driver sec2, latest version
+Opening work history file: /Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net/log/network-detect-worklog.hdf5
+Reading random seed from config file: 945949149
+Using default scratch path: /Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net/temp
+Setting up workers: 2026-01-28 17:19:18
+Workers setup: 2026-01-28 17:19:18
+gather_neuron_synapses took 0.3 s
+Workers already initialised.
+Writing to /Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net/network-synapses.hdf5
+combine_files (synapses): 0.0s
+prune_synapses_parallel (4729/4827 synapses, 98.0% kept): 0.1s
+Workers already initialised.
+combine_files (gap_junctions): 0.0s
+prune_synapses_parallel (0/0 gap_junctions, 0.0% kept): 0.1s
+prune synapses and gap junctions: 0.6s

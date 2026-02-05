@@ -1,0 +1,88 @@
+Using hdf5 driver version: latest
+Memory: 1229160448 free, 8589934592 total
+Each hyper voxel has 100 x 100 x 100 voxels
+Touch detecting all volumes
+Loading from /Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net/network-config.json
+Using random seed provided by command line: 681542567
+Reading prototype for: mSNrn_0
+Setting axon density for neuron without axon
+Reading prototype for: mSNrn_1
+Setting axon density for neuron without axon
+Reading prototype for: mSNrn_2
+Setting axon density for neuron without axon
+Reading prototype for: mSNrn_3
+Setting axon density for neuron without axon
+Reading prototype for: mSNrn_4
+Setting axon density for neuron without axon
+Reading prototype for: mSNrn_5
+Setting axon density for neuron without axon
+Reading prototype for: mSNrn_6
+Setting axon density for neuron without axon
+Reading prototype for: lSNrn_0
+Setting axon density for neuron without axon
+Reading prototype for: lSNrn_1
+Setting axon density for neuron without axon
+Reading prototype for: lSNrn_2
+Setting axon density for neuron without axon
+Reading prototype for: lSNrn_3
+Setting axon density for neuron without axon
+Reading prototype for: lSNrn_4
+Setting axon density for neuron without axon
+Reading prototype for: lSNrn_5
+Setting axon density for neuron without axon
+Reading prototype for: lSNrn_6
+Setting axon density for neuron without axon
+Loading connectivity information
+Memory: 1229160448 free, 8589934592 total
+Reading positions from file: /Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net/network-neuron-positions.hdf5
+Memory: 1229160448 free, 8589934592 total
+Position file read.
+Finding minMax coord in volume_id = None
+distribute_neurons: neuron_idx = [10 43 18 46 15 31 20  2 38  6] (n=10)
+210 hyper voxels in total
+Pre allocation done.
+Calculated distribution of neurons: 0.0 seconds
+Processing hyper voxel : 53/210 (7 neurons)
+detect_gap_junctions: No gap junctions defined in connectivity rules
+sparse_synapses: 288 took 0.0 s
+Wrote hyper voxel 53 (288 synapses, 0 gap junctions)
+process_hyper_voxel: 53 took 1.7 s
+Processing hyper voxel : 66/210 (5 neurons)
+detect_gap_junctions: No gap junctions defined in connectivity rules
+Wrote hyper voxel 66 (0 synapses, 0 gap junctions)
+process_hyper_voxel: 66 took 1.7 s
+Processing hyper voxel : 130/210 (5 neurons)
+detect_gap_junctions: No gap junctions defined in connectivity rules
+sparse_synapses: 213 took 0.0 s
+Wrote hyper voxel 130 (213 synapses, 0 gap junctions)
+process_hyper_voxel: 130 took 2.1 s
+Processing hyper voxel : 63/210 (4 neurons)
+detect_gap_junctions: No gap junctions defined in connectivity rules
+sparse_synapses: 210 took 0.0 s
+Wrote hyper voxel 63 (210 synapses, 0 gap junctions)
+process_hyper_voxel: 63 took 1.8 s
+Processing hyper voxel : 96/210 (3 neurons)
+detect_gap_junctions: No gap junctions defined in connectivity rules
+Wrote hyper voxel 96 (0 synapses, 0 gap junctions)
+process_hyper_voxel: 96 took 1.6 s
+Processing hyper voxel : 99/210 (3 neurons)
+detect_gap_junctions: No gap junctions defined in connectivity rules
+sparse_synapses: 151 took 0.0 s
+Wrote hyper voxel 99 (151 synapses, 0 gap junctions)
+process_hyper_voxel: 99 took 1.7 s
+Processing hyper voxel : 25/210 (2 neurons)
+detect_gap_junctions: No gap junctions defined in connectivity rules
+Wrote hyper voxel 25 (0 synapses, 0 gap junctions)
+process_hyper_voxel: 25 took 1.5 s
+Processing hyper voxel : 89/210 (1 neurons)
+detect_gap_junctions: No gap junctions defined in connectivity rules
+Wrote hyper voxel 89 (0 synapses, 0 gap junctions)
+process_hyper_voxel: 89 took 2.0 s
+Processing hyper voxel : 51/210 (1 neurons)
+detect_gap_junctions: No gap junctions defined in connectivity rules
+Wrote hyper voxel 51 (0 synapses, 0 gap junctions)
+process_hyper_voxel: 51 took 1.7 s
+Processing hyper voxel : 148/210 (1 neurons)
+detect_gap_junctions: No gap junctions defined in connectivity rules
+Wrote hyper voxel 148 (0 synapses, 0 gap junctions)
+process_hyper_voxel: 148 took 1.5 s

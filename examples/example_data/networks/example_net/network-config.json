@@ -1,0 +1,232 @@
+{
+    "snudda_data": "/Users/wst/Desktop/Karolinska/Simulation/Neuron",
+    "network_path": "/Users/wst/Desktop/Karolinska/Simulation/Neuron/networks/example_net",
+    "random_seed": {
+        "master_seed": 42424123123214121,
+        "init": 258170908,
+        "place": 4235951385,
+        "detect": 681542567,
+        "project": 2829814707,
+        "prune": 945949149,
+        "input": 1126082060,
+        "simulate": 2663686188
+    },
+    "regions": {
+        "SNr": {
+            "volume": {
+                "type": "mesh",
+                "d_min": 5e-07,
+                "mesh_file": "/Users/wst/Desktop/Karolinska/Meshes/SNr/SNr_total.obj",
+                "n_putative_points": 250,
+                "density": {
+                    "mSNrn": {
+                        "density_function": "abs(1/(1 + exp(10000*(z - (7000e-6)))))*(abs(1/(1 + exp(-5000*(y - (5000e-6))))))"
+                    },
+                    "lSNrn": {
+                        "density_function": "1 - abs(1/(1 + exp(10000*(z - (7000e-6)))))*(abs(1/(1 + exp(-5000*(y - (5000e-6))))))"
+                    }
+                },
+                "neuron_orientation": {
+                    "mSNrn": {
+                        "rotation_mode": "custom"
+                    },
+                    "lSNrn": {
+                        "rotation_mode": "custom"
+                    }
+                }
+            },
+            "connectivity": {
+                "mSNrn,mSNrn": {
+                    "GABA": {
+                        "conductance": [
+                            1.5e-10,
+                            2e-11
+                        ],
+                        "channel_parameters": {
+                            "tau1": 0.1,
+                            "tau2": 4.5,
+                            "tauR": 0.1644,
+                            "tauF": 0,
+                            "failRate": 0.0,
+                            "failRateACh": 1,
+                            "failRateDA": 1,
+                            "levelACh": 1,
+                            "levelDA": 1,
+                            "modACh": 1,
+                            "modDA": 1,
+                            "U": 0.185,
+                            "e": -74,
+                            "mod_file": "tmGabaA"
+                        },
+                        "cluster_size": 1,
+                        "cluster_spread": null,
+                        "pruning": {
+                            "f1": 1,
+                            "soft_max": 15,
+                            "mu2": 6,
+                            "a3": 1,
+                            "dist_pruning": null,
+                            "cluster_pruning": false
+                        }
+                    }
+                },
+                "lSNrn,mSNrn": {
+                    "GABA": {
+                        "conductance": [
+                            1.5e-10,
+                            2e-11
+                        ],
+                        "channel_parameters": {
+                            "tau1": 0.1,
+                            "tau2": 4.5,
+                            "tauR": 0.1644,
+                            "tauF": 0,
+                            "failRate": 0.0,
+                            "failRateACh": 1,
+                            "failRateDA": 1,
+                            "levelACh": 1,
+                            "levelDA": 1,
+                            "modACh": 1,
+                            "modDA": 1,
+                            "U": 0.185,
+                            "e": -74,
+                            "mod_file": "tmGabaA"
+                        },
+                        "cluster_size": 1,
+                        "cluster_spread": null,
+                        "pruning": {
+                            "f1": 1,
+                            "soft_max": 15,
+                            "mu2": 6,
+                            "a3": 1,
+                            "dist_pruning": null,
+                            "cluster_pruning": false
+                        }
+                    }
+                },
+                "mSNrn,lSNrn": {
+                    "GABA": {
+                        "conductance": [
+                            1.5e-10,
+                            2e-11
+                        ],
+                        "channel_parameters": {
+                            "tau1": 0.1,
+                            "tau2": 4.5,
+                            "tauR": 0.1644,
+                            "tauF": 0,
+                            "failRate": 0.0,
+                            "failRateACh": 1,
+                            "failRateDA": 1,
+                            "levelACh": 1,
+                            "levelDA": 1,
+                            "modACh": 1,
+                            "modDA": 1,
+                            "U": 0.185,
+                            "e": -74,
+                            "mod_file": "tmGabaA"
+                        },
+                        "cluster_size": 1,
+                        "cluster_spread": null,
+                        "pruning": {
+                            "f1": 1,
+                            "soft_max": 15,
+                            "mu2": 6,
+                            "a3": 1,
+                            "dist_pruning": null,
+                            "cluster_pruning": false
+                        }
+                    }
+                },
+                "lSNrn,lSNrn": {
+                    "GABA": {
+                        "conductance": [
+                            1.5e-10,
+                            2e-11
+                        ],
+                        "channel_parameters": {
+                            "tau1": 0.1,
+                            "tau2": 4.5,
+                            "tauR": 0.1644,
+                            "tauF": 0,
+                            "failRate": 0.0,
+                            "failRateACh": 1,
+                            "failRateDA": 1,
+                            "levelACh": 1,
+                            "levelDA": 1,
+                            "modACh": 1,
+                            "modDA": 1,
+                            "U": 0.185,
+                            "e": -74,
+                            "mod_file": "tmGabaA"
+                        },
+                        "cluster_size": 1,
+                        "cluster_spread": null,
+                        "pruning": {
+                            "f1": 1,
+                            "soft_max": 15,
+                            "mu2": 6,
+                            "a3": 1,
+                            "dist_pruning": null,
+                            "cluster_pruning": false
+                        }
+                    }
+                }
+            },
+            "neurons": {
+                "mSNrn": {
+                    "num_neurons": 12,
+                    "neuron_type": "neuron",
+                    "rotation_mode": "random",
+                    "volume_id": "SNr",
+                    "axon_density": [
+                        "new_sparse",
+                        "0"
+                    ],
+                    "stay_inside_mesh": {
+                        "k_dist": 2e-05,
+                        "n_random": 5,
+                        "max_angle": 0.1
+                    },
+                    "read_positions": false,
+                    "no_rotations": false,
+                    "neuron_path": {
+                        "mSNrn_0": "/Users/wst/Desktop/Karolinska/Simulation/Neuron/brainblenda/examples/example_data/neurons/240122LKGPeS1_01",
+                        "mSNrn_1": "/Users/wst/Desktop/Karolinska/Simulation/Neuron/brainblenda/examples/example_data/neurons/240122LKGPeS1_02",
+                        "mSNrn_2": "/Users/wst/Desktop/Karolinska/Simulation/Neuron/brainblenda/examples/example_data/neurons/240122LKGPeS1_03",
+                        "mSNrn_3": "/Users/wst/Desktop/Karolinska/Simulation/Neuron/brainblenda/examples/example_data/neurons/240122LKGPeS1_04",
+                        "mSNrn_4": "/Users/wst/Desktop/Karolinska/Simulation/Neuron/brainblenda/examples/example_data/neurons/240122LKGPeS2_05",
+                        "mSNrn_5": "/Users/wst/Desktop/Karolinska/Simulation/Neuron/brainblenda/examples/example_data/neurons/240122LKGPeS2_06",
+                        "mSNrn_6": "/Users/wst/Desktop/Karolinska/Simulation/Neuron/brainblenda/examples/example_data/neurons/240122LKGPeS2_07"
+                    }
+                },
+                "lSNrn": {
+                    "num_neurons": 37,
+                    "neuron_type": "neuron",
+                    "rotation_mode": "random",
+                    "volume_id": "SNr",
+                    "axon_density": [
+                        "new_sparse",
+                        "0"
+                    ],
+                    "stay_inside_mesh": {
+                        "k_dist": 2e-05,
+                        "n_random": 5,
+                        "max_angle": 0.1
+                    },
+                    "read_positions": false,
+                    "no_rotations": false,
+                    "neuron_path": {
+                        "lSNrn_0": "/Users/wst/Desktop/Karolinska/Simulation/Neuron/brainblenda/examples/example_data/neurons/240122LKGPeS1_01",
+                        "lSNrn_1": "/Users/wst/Desktop/Karolinska/Simulation/Neuron/brainblenda/examples/example_data/neurons/240122LKGPeS1_02",
+                        "lSNrn_2": "/Users/wst/Desktop/Karolinska/Simulation/Neuron/brainblenda/examples/example_data/neurons/240122LKGPeS1_03",
+                        "lSNrn_3": "/Users/wst/Desktop/Karolinska/Simulation/Neuron/brainblenda/examples/example_data/neurons/240122LKGPeS1_04",
+                        "lSNrn_4": "/Users/wst/Desktop/Karolinska/Simulation/Neuron/brainblenda/examples/example_data/neurons/240122LKGPeS2_05",
+                        "lSNrn_5": "/Users/wst/Desktop/Karolinska/Simulation/Neuron/brainblenda/examples/example_data/neurons/240122LKGPeS2_06",
+                        "lSNrn_6": "/Users/wst/Desktop/Karolinska/Simulation/Neuron/brainblenda/examples/example_data/neurons/240122LKGPeS2_07"
+                    }
+                }
+            }
+        }
+    }
+}
